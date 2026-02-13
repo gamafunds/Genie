@@ -2,10 +2,11 @@
 <html>
 <head>
   <title>Dashboard - Genie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </head>
-<body onload="loadUser()">
+<body onload="checkSession(); loadUser();">
 
 <div class="dashboard">
 
@@ -18,10 +19,10 @@
   <div class="main">
     <h2>Place Your Order</h2>
 
-    <textarea id="orderDetails" rows="6" placeholder="Write your order details here..."></textarea>
-    <button class="btn" onclick="placeOrder()">Place Order</button>
+    <textarea id="orderDetails" rows="6" placeholder="Describe your order clearly..."></textarea>
+    <button class="btn" onclick="placeOrder()">Submit Order</button>
 
-    <p id="successMsg" style="color:green;"></p>
+    <p id="successMsg" class="success"></p>
   </div>
 
 </div>
