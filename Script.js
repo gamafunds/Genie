@@ -1,14 +1,13 @@
-// Signup
 function signup() {
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   localStorage.setItem("genieUser", JSON.stringify({ name, email, password }));
+  localStorage.setItem("genieSession", "active");
   window.location.href = "dashboard.html";
 }
 
-// Login
 function login() {
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
@@ -16,13 +15,19 @@ function login() {
   const user = JSON.parse(localStorage.getItem("genieUser"));
 
   if (user && user.email === email && user.password === password) {
+    localStorage.setItem("genieSession", "active");
     window.location.href = "dashboard.html";
   } else {
-    alert("Invalid login");
+    alert("Invalid login credentials");
   }
 }
 
-// Load user
+function checkSession() {
+  if (localStorage.getItem("genieSession") !== "active") {
+    window.location.href = "login.html";
+  }
+}
+
 function loadUser() {
   const user = JSON.parse(localStorage.getItem("genieUser"));
   if (user) {
@@ -30,12 +35,11 @@ function loadUser() {
   }
 }
 
-// Logout
 function logout() {
+  localStorage.removeItem("genieSession");
   window.location.href = "index.html";
 }
 
-// Place Order (Email)
 function placeOrder() {
   emailjs.init("YOUR_PUBLIC_KEY");
 
@@ -47,8 +51,10 @@ function placeOrder() {
     from_email: user.email,
     message: order
   }).then(function() {
-    document.getElementById("successMsg").innerText = "Order placed successfully! We will contact you soon.";
+    document.getElementById("successMsg").innerText =
+      "Order submitted successfully! We will contact you soon.";
+    document.getElementById("orderDetails").value = "";
   }, function(error) {
-    alert("Failed to send order.");
+    alert("Error sending order.");
   });
 }
