@@ -17,11 +17,63 @@
   </div>
 
   <div class="main">
-    <h2>Place Your Order</h2>
+    <!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard - Genie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <textarea id="orderDetails" rows="6" placeholder="Describe your order clearly..."></textarea>
-    <button class="btn" onclick="placeOrder()">Submit Order</button>
+<div class="dashboard">
 
+  <div class="sidebar">
+    <h2>🧞 Genie</h2>
+    <p>Place your order below</p>
+  </div>
+
+  <div class="main">
+    <h2>Submit Your Order</h2>
+
+    <!-- NETLIFY FORM START -->
+    <form name="genie-order"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field">
+
+      <!-- Required hidden input -->
+      <input type="hidden" name="form-name" value="genie-order" />
+
+      <!-- Spam protection -->
+      <p hidden>
+        <label>Don’t fill this out:
+          <input name="bot-field" />
+        </label>
+      </p>
+
+      <label>Full Name</label>
+      <input type="text" name="name" required />
+
+      <label>Email Address</label>
+      <input type="email" name="email" required />
+
+      <label>Order Details</label>
+      <textarea name="order_details" rows="6" required></textarea>
+
+      <button type="submit" class="btn">
+        Submit Order
+      </button>
+
+    </form>
+    <!-- NETLIFY FORM END -->
+
+  </div>
+
+</div>
+
+</body>
+</html>
     <p id="successMsg" class="success"></p>
   </div>
 
